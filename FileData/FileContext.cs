@@ -42,6 +42,13 @@ public class FileContext
         }
 
         string content = File.ReadAllText(filepath);
-        dataContainer = JsonSerializer
+        dataContainer = JsonSerializer.Deserialize<DataContainer>(content);
+    }
+
+    public void SaveChanges()
+    {
+        string serialized = JsonSerializer.Serialize(dataContainer);
+        File.WriteAllText(filepath, serialized);
+        dataContainer = null;
     }
 }
