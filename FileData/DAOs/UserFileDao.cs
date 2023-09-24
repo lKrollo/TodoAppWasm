@@ -16,11 +16,26 @@ public class UserFileDao : IUserDao
 
     public Task<User> CreateAsync(User user)
     {
-        throw new NotImplementedException();
+        int userId = 1;
+        if (_context.Users.Any())
+        {
+            userId = _context.Users.Max(u => u.Id);
+            userId++;
+        }
+
+        user.Id = userId;
+
+        _context.Users.Add(user);
+        _context.SaveChanges();
+
+        return Task.FromResult(user);
     }
 
-    public Task<User> GetByUsernameAsync(string Username)
+    public Task<User?> GetByUsernameAsync(string username)
     {
-        throw new NotImplementedException();
+        User? existing = _context.Users.FirstOrDefault(u =>
+            u.UserName.Equals(username, StringComparison.OrdinalIgnoreCase)
+        );
+        return Task.FromResult(existing);
     }
 }
