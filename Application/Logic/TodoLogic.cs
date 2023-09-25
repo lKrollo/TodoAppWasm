@@ -29,4 +29,10 @@ public class TodoLogic : ITodoLogic
         Todo created = await _todoDao.CreateAsync(todo);
         return created;
     }
+
+    private void ValidateTodo(TodoCreationDto dto)
+    {
+        if (string.IsNullOrEmpty(dto.Title)) throw new Exception("Title cannot be empty.");
+        // other validation stuff
+    }
 }

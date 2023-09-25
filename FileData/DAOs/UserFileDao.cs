@@ -1,5 +1,4 @@
 using Application.DaoInterfaces;
-using Application.LogicInterfaces;
 using Domain.DTOs;
 using Domain.Models;
 
@@ -50,5 +49,11 @@ public class UserFileDao : IUserDao
         }
 
         return Task.FromResult(users);
+    }
+
+    public Task<User?> getByIdAsync(int id)
+    {
+        User? user = _context.Users.FirstOrDefault(u => u.Id == id);
+        return Task.FromResult(user);
     }
 }

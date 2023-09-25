@@ -9,11 +9,11 @@ namespace WebAPI.Controllers;
 [Route("[controller]")]
 public class UsersController : ControllerBase
 {
-    private readonly IUserLogic userLogic;
+    private readonly IUserLogic _userLogic;
     
     public UsersController(IUserLogic userLogic)
     {
-        this.userLogic = userLogic;
+        this._userLogic = userLogic;
     }
     
     [HttpPost]
@@ -21,7 +21,7 @@ public class UsersController : ControllerBase
     {
         try
         {
-            User user = await userLogic.CreateAsync(dto);
+            User user = await _userLogic.CreateAsync(dto);
             return Created($"/users/{user.Id}", user);
         }
         catch (Exception e)
@@ -37,7 +37,7 @@ public class UsersController : ControllerBase
         try
         {
             SearchUserParametersDto parameters = new(username);
-            IEnumerable<User> users = await userLogic.getAsync(parameters);
+            IEnumerable<User> users = await _userLogic.getAsync(parameters);
             return Ok(users);
         }
         catch (Exception e)

@@ -17,5 +17,24 @@
       "UserName": "Katrine"
     }
   ],
-  "Todos": []
+  "Todos": [
+    {
+      "Id": 1,
+      "Owner": {
+        "Id": 3,
+        "UserName": "Kat"
+      },
+      "Title": "Clean the appartment",
+      "IsCompleted": false
+    },
+    {
+      "Id": 2,
+      "Owner": {
+        "Id": 1,
+        "UserName": "Rollo"
+      },
+      "Title": "Relax",
+      "IsCompleted": false
+    }
+  ]
 }
