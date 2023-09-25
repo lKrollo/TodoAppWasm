@@ -3,6 +3,18 @@
     {
       "Id": 1,
       "UserName": "Rollo"
+    },
+    {
+      "Id": 2,
+      "UserName": "Alec"
+    },
+    {
+      "Id": 3,
+      "UserName": "Kat"
+    },
+    {
+      "Id": 4,
+      "UserName": "Katrine"
     }
   ],
   "Todos": []

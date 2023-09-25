@@ -7,16 +7,17 @@ namespace Application.Logic;
 
 public class UserLogic : IUserLogic
 {
-    private readonly IUserDao userDao;
+    private readonly IUserDao _userDao;
+    private IUserLogic _userLogicImplementation;
 
     public UserLogic(IUserDao userDao)
     {
-        this.userDao = userDao;
+        this._userDao = userDao;
     }
 
     public async Task<User> CreateAsync(UserCreationDto dto)
     {
-        User? existing = await userDao.GetByUsernameAsync(dto.UserName);
+        User? existing = await _userDao.GetByUsernameAsync(dto.UserName);
         if (existing != null)
             throw new Exception("Username already taken!");
 
@@ -26,9 +27,14 @@ public class UserLogic : IUserLogic
             UserName = dto.UserName
         };
         
-        User created = await userDao.CreateAsync(toCreate);
+        User created = await _userDao.CreateAsync(toCreate);
         
         return created;
+    }
+
+    public Task<IEnumerable<User>> getAsync(SearchUserParametersDto searchUserParameters)
+    {
+        return _userDao.GetAsync(searchUserParameters);
     }
 
     private static void ValidateData(UserCreationDto userToCreate)
