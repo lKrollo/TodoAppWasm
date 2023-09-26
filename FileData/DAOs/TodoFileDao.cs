@@ -52,7 +52,7 @@ public class TodoFileDao : ITodoDao
                 t.IsCompleted == searchParameters.CompletedStatus);
         }
 
-        if (!string.IsNullOrEmpty(searchParameters.TitleContains)){}
+        if (!string.IsNullOrEmpty(searchParameters.TitleContains))
         {
             todos = todos.Where(t =>
                 t.Title.Contains(searchParameters.TitleContains, StringComparison.OrdinalIgnoreCase));

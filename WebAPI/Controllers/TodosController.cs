@@ -33,12 +33,12 @@ public class TodosController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Todo>>> GetAsync([FromQuery] string? username, [FromQuery] int? todoId,
+    public async Task<ActionResult<IEnumerable<Todo>>> GetAsync([FromQuery] string? username, [FromQuery] int? userId,
         [FromQuery] bool? completedStatus, [FromQuery] string? titleContains)
     {
         try
         {
-            SearchTodoParametersDto parameters = new(username, todoId, completedStatus, titleContains);
+            SearchTodoParametersDto parameters = new(username, userId, completedStatus, titleContains);
             IEnumerable<Todo> todos = await _todoLogic.GetAsync(parameters);
             return Ok(todos);
         }
