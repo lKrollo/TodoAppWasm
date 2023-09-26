@@ -59,4 +59,14 @@ public class TodoFileDao : ITodoDao
         }
         return Task.FromResult(todos);
     }
+
+    public Task UpdateAsync(Todo todo)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Todo> GetByIdAsync(int id)
+    {
+        
+    }
 }
