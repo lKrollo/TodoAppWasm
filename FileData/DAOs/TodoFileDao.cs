@@ -60,13 +60,39 @@ public class TodoFileDao : ITodoDao
         return Task.FromResult(todos);
     }
 
-    public Task UpdateAsync(Todo todo)
+    public Task UpdateAsync(Todo toUpdate)
     {
-        throw new NotImplementedException();
+        Todo? existing = _context.Todos.FirstOrDefault(todo => todo.Id == toUpdate.Id);
+        if (existing == null)
+        {
+            throw new Exception($"Todo with id {toUpdate.Id} does not exist!");
+        }
+
+        _context.Todos.Remove(existing);
+        _context.Todos.Add(toUpdate);
+    
+        _context.SaveChanges();
+    
+        return Task.CompletedTask;
     }
 
     public Task<Todo> GetByIdAsync(int id)
     {
-        
+        Todo? existing = _context.Todos.FirstOrDefault(t => t.Id == id);
+        return Task.FromResult(existing);
+    }
+
+    public Task DeleteAsync(int id)
+    {
+        Todo? existing = _context.Todos.FirstOrDefault(todo => todo.Id == id);
+        if (existing == null)
+        {
+            throw new Exception($"Todo with id {id} does not exist!");
+        }
+
+        _context.Todos.Remove(existing); 
+        _context.SaveChanges();
+    
+        return Task.CompletedTask;
     }
 }
