@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
-builder.Services.AddScoped<IUserService, UserHttpClient>();
+
 
 var app = builder.Build();
 
@@ -25,9 +25,11 @@ if (!app.Environment.IsDevelopment())
 builder.Services.AddScoped(
     sp => 
         new HttpClient { 
-            BaseAddress = new Uri("https://localhost:5048") 
+            BaseAddress = new Uri("https://localhost:7061") 
         }
 );
+
+builder.Services.AddScoped<IUserService, UserHttpClient>();
 
 app.UseHttpsRedirection();
 
@@ -39,3 +41,4 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 app.Run();
+
