@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Domain.Models;
 
 public class Todo
 {
+    [Key]
     public int Id { get; set; }
     public User Owner { get; }
     public string Title { get; }

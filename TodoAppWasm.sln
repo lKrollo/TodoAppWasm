@@ -3,8 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{A18F719B-96D3-44B2-B14F-2A96CE70FC3A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{326DA465-A3ED-4455-9400-9162A6B80B72}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7CDFC5A7-263D-4FC5-BA84-F4547297772B} = {7CDFC5A7-263D-4FC5-BA84-F4547297772B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{11B353E6-D7C2-4D81-B3E2-E9E3F7D88D80}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7CDFC5A7-263D-4FC5-BA84-F4547297772B} = {7CDFC5A7-263D-4FC5-BA84-F4547297772B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileData", "FileData\FileData.csproj", "{8C1D2B23-B9F5-44FA-9184-E86DDDAA5585}"
 EndProject
@@ -17,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClients", "HttpClients\
 	ProjectSection(ProjectDependencies) = postProject
 		{A18F719B-96D3-44B2-B14F-2A96CE70FC3A} = {A18F719B-96D3-44B2-B14F-2A96CE70FC3A}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfcDataAccess", "EfcDataAccess\EfcDataAccess.csproj", "{7CDFC5A7-263D-4FC5-BA84-F4547297772B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,5 +56,9 @@ Global
 		{B595836B-4BB1-41EB-AAAC-C525A83EE588}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B595836B-4BB1-41EB-AAAC-C525A83EE588}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B595836B-4BB1-41EB-AAAC-C525A83EE588}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CDFC5A7-263D-4FC5-BA84-F4547297772B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CDFC5A7-263D-4FC5-BA84-F4547297772B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CDFC5A7-263D-4FC5-BA84-F4547297772B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CDFC5A7-263D-4FC5-BA84-F4547297772B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
