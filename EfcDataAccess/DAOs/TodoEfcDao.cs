@@ -1,14 +1,24 @@
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace EfcDataAccess.DAOs;
 
 public class TodoEfcDao : ITodoDao
 {
-    public Task<Todo> CreateAsync(Todo todo)
+    private readonly TodoContext _context;
+
+    public TodoEfcDao(TodoContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
+    }
+
+    public async Task<Todo> CreateAsync(Todo todo)
+    {
+        EntityEntry<Todo> added = await _context.Todos.AddAsync(todo);
+        await _context.SaveChangesAsync();
+        return added.Entity;
     }
 
     public Task<IEnumerable<Todo>> GetAsync(SearchTodoParametersDto searchParameters)

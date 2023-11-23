@@ -10,7 +10,14 @@ public class TodoContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source = Todo.db");
+        optionsBuilder.UseSqlite("Data Source = ../EfcDataAccess/Todo.db");
         optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);            
+    }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Todo>().HasKey(todo => todo.Id);
+        modelBuilder.Entity<User>().HasKey(user => user.Id);
+        modelBuilder.Entity<Todo>().Property(todo => todo.Title).HasMaxLength(50);
     }
 }

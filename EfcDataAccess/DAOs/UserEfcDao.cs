@@ -1,28 +1,49 @@
 using Application.DaoInterfaces;
 using Domain.DTOs;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace EfcDataAccess.DAOs;
 
 public class UserEfcDao : IUserDao
 {
-    public Task<User> CreateAsync(User user)
+    private readonly TodoContext _context;
+
+    public UserEfcDao(TodoContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    public Task<User?> GetByUsernameAsync(string userName)
+    public async Task<User> CreateAsync(User user)
     {
-        throw new NotImplementedException();
+        EntityEntry<User> newUser = await _context.Users.AddAsync(user);
+        await _context.SaveChangesAsync();
+        return newUser.Entity;
     }
 
-    public Task<IEnumerable<User>> GetAsync(SearchUserParametersDto searchParameters)
+    public async Task<User?> GetByUsernameAsync(string userName)
     {
-        throw new NotImplementedException();
+        User? existing = await _context.Users.FirstOrDefaultAsync(u => u.UserName.ToLower().Equals(userName.ToLower()));
+        return existing;
     }
 
-    public Task<User?> getByIdAsync(int id)
+    public async Task<IEnumerable<User>> GetAsync(SearchUserParametersDto searchParameters)
     {
-        throw new NotImplementedException();
+        IQueryable<User> usersQuery = _context.Users.AsQueryable();
+        if (searchParameters.UsernameContains != null)
+        {
+            usersQuery = usersQuery.Where(u =>
+                u.UserName.ToLower().Contains(searchParameters.UsernameContains.ToLower()));
+        }
+
+        IEnumerable<User> result = await usersQuery.ToListAsync();
+        return result;
+    }
+
+    public async Task<User?> getByIdAsync(int id)
+    {
+        User? existing = await _context.Users.FindAsync(id);
+        return existing;
     }
 }
